@@ -24,14 +24,12 @@ class CSVParser
     public:
 
         // constructor declaration
-        CSVParser( 
-            string          _relativeFilePath
-        );
+        CSVParser( string _relativeFilePath );
 
         // public methods
-        string          run();
+        //void run();
 
     private:
         // member variables
-            string          _relativeFilePath;
+        string _relativeFilePath;
 };
