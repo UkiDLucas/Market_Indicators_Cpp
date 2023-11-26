@@ -37,7 +37,7 @@ void Tokenizer::printTokens()
 
 
 
-std::vector<std::string> Tokenizer::getTokens(std::string originalText, vector<char> delimiters)
+std::vector<std::string> Tokenizer::extractTokens(std::string originalText,  char delimiter )
 {   
     std::vector<std::string> tokens;
 
