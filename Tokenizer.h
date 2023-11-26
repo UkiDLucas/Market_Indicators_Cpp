@@ -23,7 +23,11 @@ using namespace std;
 class Tokenizer
 {
     public:
-        // constructor declaration
+        /**
+        * Constructor.
+        ** @input: text to be splitted into tokens,
+        ** @input: a vector of delimiters   
+        */
         Tokenizer(string text, vector<char> delimiters );
 
         // public methods
