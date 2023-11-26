@@ -37,7 +37,7 @@ CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 
     string text = "token1, token2, token3 , ";
     Tokenizer tokenizer = Tokenizer( text, delimiters );
-    tokenizer.printTokens();
+    //tokenizer.printTokens();
 }
 
 
