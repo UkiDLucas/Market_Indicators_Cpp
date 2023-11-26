@@ -17,20 +17,40 @@
 //#include <iomanip>
 //#include "tokenizer.cpp"
 #include "CSVParser.h" // CSVParser class
+#include "Tokenizer.h" // Tokenizer class
+#include <vector>
+
 
 // to cut down on typying "std::" and make code more clear
 using namespace std;
 
-string _relativeFilePath;
+
+// local version of tokens:
+std::vector<std::string> tokens;
+
+void printTokens()
+{
+        int counter = 0;
+    // pass by reference
+    for (std::string& token : tokens)
+    {
+        counter++;
+        std::cout << counter << " token \"" << token << "\" " << std::endl;
+    }
+}
 
 /** This is the constructor for the class. 
  */
-CSVParser::CSVParser(string relativeFilePath)
+CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 {
-    _relativeFilePath = relativeFilePath;
+    cout << "CSVParser constructor called with " << relativeFilePath  << endl;
 
-    cout << "CSVParser constructor called with " << _relativeFilePath  << endl;
+    Tokenizer tokenizer;
+    tokens = tokenizer.getTokens("token1, token2, token3 , ", delimiters);
+    printTokens();
+    
 }
+
 
 
 

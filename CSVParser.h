@@ -15,6 +15,7 @@
 #endif
 
 #include <string>
+#include <vector>
 #include "DateFormat.h" // DateFormat enum class
 using namespace std;
 
@@ -24,7 +25,7 @@ class CSVParser
     public:
 
         // constructor declaration
-        CSVParser( string _relativeFilePath );
+        CSVParser( string _relativeFilePath , vector<char> delimiters);
 
         // public methods
         //void run();
