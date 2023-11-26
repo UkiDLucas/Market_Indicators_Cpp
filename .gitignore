@@ -32,3 +32,5 @@
 *.app
 run.bash
 Tokenizer
+.vscode/settings.json
+app
