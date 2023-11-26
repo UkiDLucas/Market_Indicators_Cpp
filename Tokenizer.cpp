@@ -4,9 +4,41 @@
 #include <vector>
 #include <iostream>
 
+
+
+/** Constructor.
+ * @input: text to be splitted into tokens,
+ * @input: a vector of delimiters
+ * This constructor actually does the tokenizing,
+ * and populates the tokens vector, a member variable.
+*/
+Tokenizer::Tokenizer(string text, vector<char> delimiters)
+{
+    std::cout << "Tokenizer constructor called with: " << std::endl;
+    std::cout << "TEXT: " << text << std::endl;
+
+
+    unsigned int delimiterCounter = 0;
+    vector<string> tokens0 = extractTokens( text, delimiters.at(delimiterCounter));
+}
+
+
+void Tokenizer::printTokens()
+{
+        int counter = 0;
+    // pass by reference
+    for (std::string& token : tokens)
+    {
+        counter++;
+        std::cout << counter << " token \"" << token << "\" " << std::endl;
+    }
+}
+
+
+
+
 std::vector<std::string> Tokenizer::getTokens(std::string originalText, vector<char> delimiters)
 {   
-    char delimiter = delimiters.at(0); // get the first delimiter TODO: implement all delimiters.
     std::vector<std::string> tokens;
 
     /** The index could be negative. */
