@@ -24,18 +24,25 @@ class Tokenizer
 {
     public:
         // constructor declaration
-        Tokenizer();
+        Tokenizer(string text, vector<char> delimiters );
 
         // public methods
-        
-        /** 
-         * Function that takes parameters:
-         * text, 
-         * and vector of delimiter, the delimiters could be multi-character text,
-         * splits the text into tokens and returns them as a vector.
-         **/
-        vector<string> getTokens( string text, vector<char> delimiters );
+
+        /** prints tokens to console */
+        void printTokens();
 
     private:
         // member variables
+        /** class holder of the tokens */
+        std::vector<std::string> tokens;
+
+        // private methods
+
+        /** 
+         ** @input: text to be slipped into tokens,
+         ** @input: a single  delimiter, the delimiters could be multi-character text,
+         ** @output: vector of string tokens
+         **/
+        vector<string> extractTokens( string text, char delimiter );
+
 };
