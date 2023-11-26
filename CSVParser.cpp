@@ -25,47 +25,62 @@
 using namespace std;
 
 
-// local version of tokens:
-std::vector<std::string> tokens;
 
 
-/** This is the constructor for the class. 
- */
-CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
+
+
+
+void readFilePopulateVector(string relativeFilePath, vector<char> delimiters, vector<MarketIndicator>& marketIndicatiors)
 {
-    cout << "CSVParser constructor called with " << relativeFilePath  << endl;
+    cout << "readFilePopulateVector( " << relativeFilePath  << " )" << endl;
+    //     // https://www.coursera.org/learn/cplusplus-crypto-iii/lecture/vqRew/open-a-file
+    //     // Create an ifstream object and open the CSV file.
+    ifstream file(relativeFilePath); // TODO: hardcoded file name, pass as kwarg
 
-    string text = "token1, token2, token3 , ";
-    Tokenizer tokenizer = Tokenizer( text, delimiters );
-    //tokenizer.printTokens();
-}
+    // check if opening the file was successful
+    if (!file.is_open()) {
+        cout << "Error: Could not open file." << endl;
+        return; // Some error -1, not 0
+    }
 
+    string line; // a single line of CSV file
+    
+    // reuse this vector for each line of CSV file
+    std::vector<std::string> tokens;
+    unsigned int lineCounter = 0;
 
+    // Read each line of the file and split it into individual columns.
+    while (getline(file, line)) 
+    { 
+        lineCounter++;
+        // getline returns an istream with eofbit status set if no characters were extracted
+        // cout << "CSV file line: " << line << endl;
 
+        Tokenizer tokenizer = Tokenizer( line, delimiters );
+        //tokenizer.printTokens();
+        tokens = tokenizer.getTokens();
 
-/** This method will initialize (start and run) the class. 
- ** Populates the order book.
- */
-// int MerkelMain::init()
-// {
-//     loadOrderBook();
+        if(tokens.size() != 7)
+        {
+            cout << "ERROR in file line " << lineCounter << " : the line has " << tokens.size() << " tokens, expected 7." << endl;
+            continue; // skip this line, go to the next one in while loop
+        }
 
-//     /** This loop controls the UI. */
-//     while (true) // an infinite loop, click control-Z to stop
-//     {
-//         printMenu();
-//         int userOption = getUserOption();
-//         processUserOption(userOption);
-//         // break; // temporary exit from the loop
-//     }
-//     return 0;
-// }
+//         try{
+//             temp_fullName        = tokens[0];    
+//             temp_symbol          = tokens[1];
+//             temp_originalFileName= tokens[2];
+//             temp_dateFormat      = tokens[3] == "YYYY-MM-DD" ? DateFormat::YYYY_MM_DD : DateFormat::MM_DD_YYYY;
+//             temp_columnOfInterest= std::stoi(tokens[4]);
+//             temp_oldestDate      = tokens[5];
+//             temp_csvPathURL      = tokens[6];
+//         }catch(const std::exception& e){ // const - cannot change exception, & reference, not copy
+//             cout << "ERROR: CSV file line has invalid values, skipping it." << endl;
+//             continue; // skip this line, go to the next one in while loop
+//         }
 
-
-
-
-
-// int MerkelMain::populateOrderBookEntryFromCSV_class() 
+//         // add the data from CSV to marketIndicatiors using marketIndicatiors.push_back(marketIndicatiors);
+//         marketIndicatiors.push
 // {
 //     // https://www.coursera.org/learn/cplusplus-crypto-iii/lecture/vqRew/open-a-file
 //     // Create an ifstream object and open the CSV file.
@@ -78,16 +93,7 @@ CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 //     }
 
 //     // Creating variables outside of the while loop to reuse them.
-//     /** token 0 */
-//     string temp_timestamp = ""; 
-//     /** token 1 */
-//     string  temp_product = ""; 
-//     /** token 2 */
-//     OrderType temp_orderType = OrderType::bid;
-//     /** token 3 */
-//     double temp_amount = 0;
-//     /** token 4 */
-//     double temp_price = 0;
+ 
 
 //     // Read each line of the file and split it into individual columns.
 //     string line;
@@ -134,9 +140,26 @@ CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 //                 temp_product
 //             }
 //         );
-//     }
+    }
 
-//     // Close the CSV file.
-//     file.close();
-//     return 0;
-// }
+    // Close the CSV file.
+    file.close();
+     return;
+}
+
+
+
+/** This is the constructor for the class. 
+ */
+CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
+{
+    cout << "CSVParser constructor called with " << relativeFilePath  << endl;
+
+    string text = "token1, token2, token3 , ";
+    Tokenizer tokenizer = Tokenizer( text, delimiters );
+    tokenizer.printTokens();
+
+    vector<MarketIndicator> marketIndicatiors;
+    readFilePopulateVector(relativeFilePath, delimiters, marketIndicatiors);  
+}
+

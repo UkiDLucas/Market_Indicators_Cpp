@@ -17,6 +17,8 @@
 #include <string>
 #include <vector>
 #include "DateFormat.h" // DateFormat enum class
+#include "MarketIndicator.h" // MarketIndicator class TODO: remove when implemented template T
+
 using namespace std;
 
 /** This interface is intended for any implementation of CSV parser */
@@ -25,12 +27,12 @@ class CSVParser
     public:
 
         // constructor declaration
-        CSVParser( string _relativeFilePath , vector<char> delimiters);
+        CSVParser( string relativeFilePath , vector<char> delimiters);
 
         // public methods
-        //void run();
+        //void CSVParser::readFilePopulateVector(string relativeFilePath, vector<MarketIndicator>& marketIndicatiors);
 
     private:
         // member variables
-        string _relativeFilePath;
+        //string _relativeFilePath;
 };

@@ -14,8 +14,8 @@
 */
 Tokenizer::Tokenizer(string text, vector<char> delimiters)
 {
-    std::cout << "Tokenizer constructor called with: " << std::endl;
-    std::cout << "TEXT: " << text << std::endl;
+    //std::cout << "Tokenizer constructor called with: " << std::endl;
+    //std::cout << "TEXT: " << text << std::endl;
 
     unsigned int delimiterCounter = 0;
     vector<string> tokens0 = extractTokens( text, delimiters.at(delimiterCounter));
@@ -33,6 +33,10 @@ void Tokenizer::printTokens()
     }
 }
 
+std::vector<std::string> Tokenizer::getTokens()
+{
+    return tokens;
+}
 
 
 

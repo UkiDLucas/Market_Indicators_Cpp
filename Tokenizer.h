@@ -34,6 +34,7 @@ class Tokenizer
 
         /** prints tokens to console */
         void printTokens();
+        std::vector<std::string> getTokens();
 
     private:
         // member variables
