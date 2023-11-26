@@ -28,16 +28,6 @@ using namespace std;
 // local version of tokens:
 std::vector<std::string> tokens;
 
-void printTokens()
-{
-        int counter = 0;
-    // pass by reference
-    for (std::string& token : tokens)
-    {
-        counter++;
-        std::cout << counter << " token \"" << token << "\" " << std::endl;
-    }
-}
 
 /** This is the constructor for the class. 
  */
@@ -45,10 +35,9 @@ CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 {
     cout << "CSVParser constructor called with " << relativeFilePath  << endl;
 
-    Tokenizer tokenizer;
-    tokens = tokenizer.getTokens("token1, token2, token3 , ", delimiters);
-    printTokens();
-    
+    string text = "token1, token2, token3 , ";
+    Tokenizer tokenizer = Tokenizer( text, delimiters );
+    tokenizer.printTokens();
 }
 
 
