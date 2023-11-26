@@ -34,7 +34,7 @@ class Tokenizer
          * and vector of delimiter, the delimiters could be multi-character text,
          * splits the text into tokens and returns them as a vector.
          **/
-        vector<string> getTokens( string text, vector<string> delimiters );
+        vector<string> getTokens( string text, vector<char> delimiters );
 
     private:
         // member variables
