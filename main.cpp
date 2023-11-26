@@ -16,9 +16,9 @@ int main()
 
     // https://github.com/UkiDLucas/MarketIndicators.jl/blob/9b2690b300819214dd4b84a0401feeb4ef903797/src/DATA/Indicators.csv
     // vector<char> delimiters = {',', ' '};
-    CSVParser parser = CSVParser("Indicators.csv", {',', ' '});
-    //parser.run();
+    CSVParser parser = CSVParser("Indicators.csv", {','}); // comma delimited file
 
+    // TODO make some GUI
 
     return 0;
 }

@@ -19,12 +19,10 @@
 #include "CSVParser.h" // CSVParser class
 #include "Tokenizer.h" // Tokenizer class
 #include <vector>
-
+#include "MarketIndicator.cpp" 
 
 // to cut down on typying "std::" and make code more clear
 using namespace std;
-
-
 
 
 
@@ -49,6 +47,8 @@ void readFilePopulateVector(string relativeFilePath, vector<char> delimiters, ve
     std::vector<std::string> tokens;
     unsigned int lineCounter = 0;
 
+    Tokenizer tokenizer = Tokenizer();
+
     // Read each line of the file and split it into individual columns.
     while (getline(file, line)) 
     { 
@@ -56,9 +56,8 @@ void readFilePopulateVector(string relativeFilePath, vector<char> delimiters, ve
         // getline returns an istream with eofbit status set if no characters were extracted
         // cout << "CSV file line: " << line << endl;
 
-        Tokenizer tokenizer = Tokenizer( line, delimiters );
         //tokenizer.printTokens();
-        tokens = tokenizer.getTokens();
+        tokens = tokenizer.extractTokens(line, delimiters[0]); 
 
         if(tokens.size() != 7)
         {
@@ -66,80 +65,41 @@ void readFilePopulateVector(string relativeFilePath, vector<char> delimiters, ve
             continue; // skip this line, go to the next one in while loop
         }
 
-//         try{
-//             temp_fullName        = tokens[0];    
-//             temp_symbol          = tokens[1];
-//             temp_originalFileName= tokens[2];
-//             temp_dateFormat      = tokens[3] == "YYYY-MM-DD" ? DateFormat::YYYY_MM_DD : DateFormat::MM_DD_YYYY;
-//             temp_columnOfInterest= std::stoi(tokens[4]);
-//             temp_oldestDate      = tokens[5];
-//             temp_csvPathURL      = tokens[6];
-//         }catch(const std::exception& e){ // const - cannot change exception, & reference, not copy
-//             cout << "ERROR: CSV file line has invalid values, skipping it." << endl;
-//             continue; // skip this line, go to the next one in while loop
-//         }
+        string          temp_fullName;
+        string          temp_symbol;
+        string          temp_originalFileName;
+        DateFormat      temp_dateFormat;
+        unsigned int    temp_columnOfInterest;
+        string          temp_oldestDate;
+        string          temp_csvPathURL;
 
-//         // add the data from CSV to marketIndicatiors using marketIndicatiors.push_back(marketIndicatiors);
-//         marketIndicatiors.push
-// {
-//     // https://www.coursera.org/learn/cplusplus-crypto-iii/lecture/vqRew/open-a-file
-//     // Create an ifstream object and open the CSV file.
-//     ifstream file("20200317.csv"); // TODO: hardcoded file name, pass as kwarg
-
-//     // check if opening the file was successful
-//     if (!file.is_open()) {
-//         cout << "Error: Could not open file." << endl;
-//         return -1; // Some error -1, not 0
-//     }
-
-//     // Creating variables outside of the while loop to reuse them.
- 
-
-//     // Read each line of the file and split it into individual columns.
-//     string line;
-
-//     /** Within a line of CSV file, tokens are text separated by comma. */
-//     std::vector<std::string> tokens;
-
-//     // https://www.coursera.org/learn/cplusplus-crypto-iii/lecture/vtUz2/read-a-file-using-getline
-//     while (getline(file, line)) { // getline returns an istream with eofbit status set if no characters were extracted
-//         //cout << "CSV file line: " << line << endl;
-//         tokens = tokennize(line, ','); // Tokenize by comma.
-
-//         if(tokens.size() != 5)
-//         {
-//             cout << "ERROR: CSV file line has " << tokens.size() << " tokens, expected 5." << endl;
-//             continue; // skip this line, go to the next one in while loop
-//         }
-
-//         try{
-//             temp_timestamp = tokens[0];    
-//             temp_product   = tokens[1];
-//             temp_orderType = tokens[2] == "bid" ? OrderType::bid : OrderType::ask;
-//             temp_amount    = tokens[3] != "" ? std::stod(tokens[3]) : 0.0;
-//             temp_price     = tokens[4] != "" ? std::stod(tokens[4]) : 0.0;
-
-//             if (temp_amount == 0.0 || temp_price == 0.0)
-//             {
-//                 cout << "ERROR: CSV file line has missing amount or price." << endl;
-//                 continue; // skip this line, go to the next one in while loop
-//             }
-//         }catch(const std::exception& e){ // const - cannot change exception, & reference, not copy
-//             cout << "ERROR: CSV file line has invalid values, skipping it." << endl;
-//             continue; // skip this line, go to the next one in while loop
-//         }
+        try
+        {
+            temp_fullName           = tokens[0];    
+            temp_symbol             = tokens[1];
+            temp_originalFileName   = tokens[2];
+            temp_dateFormat         = DateFormat::YYYY_MM_DD_dashes;
+            temp_columnOfInterest   = std::stoi(tokens[4]); // stoi() converts string to int
+            temp_oldestDate         = tokens[5];    
+            temp_csvPathURL         = tokens[6];
+        }catch(const std::exception& e){ // const - cannot change exception, & reference, not copy
+            cout << "ERROR in CSV line " << lineCounter << " the line has invalid values, skipping it." << endl;
+            continue; // skip this line, go to the next one in while loop
+        }
 
 //         // add the data from CSV to orders using orders.push_back(order);
-//         orders.push_back(
-//             OrderBookEntry{ 
-//                 // constructor order: _price, _amount, _timestamp, _orderBookType, _product
-//                 temp_price, 
-//                 temp_amount, 
-//                 temp_timestamp, 
-//                 temp_orderType, 
-//                 temp_product
-//             }
-//         );
+        marketIndicatiors.push_back(
+            MarketIndicator{
+                // constructor order: _price, _amount, _timestamp, _orderBookType, _product
+                temp_fullName,
+                temp_symbol,
+                temp_originalFileName,
+                temp_dateFormat,
+                temp_columnOfInterest,
+                temp_oldestDate,
+                temp_csvPathURL
+            } // end of MarketIndicator constructor
+        );
     }
 
     // Close the CSV file.
@@ -149,17 +109,29 @@ void readFilePopulateVector(string relativeFilePath, vector<char> delimiters, ve
 
 
 
+
 /** This is the constructor for the class. 
  */
 CSVParser::CSVParser(string relativeFilePath, vector<char> delimiters)
 {
     cout << "CSVParser constructor called with " << relativeFilePath  << endl;
 
-    string text = "token1, token2, token3 , ";
-    Tokenizer tokenizer = Tokenizer( text, delimiters );
-    tokenizer.printTokens();
 
     vector<MarketIndicator> marketIndicatiors;
-    readFilePopulateVector(relativeFilePath, delimiters, marketIndicatiors);  
+    readFilePopulateVector(relativeFilePath, delimiters, marketIndicatiors); 
+    
+    cout << " =============== " << endl;
+    cout << "Populated " << marketIndicatiors.size() << " MarketIndicators!" << endl;
+
+    cout << " =============== " << endl;
+    cout << "Printing ID: 3: " << endl;
+    cout << "temp_fullName : "          << marketIndicatiors[3].getFullName()           << endl;
+    cout << "temp_symbol : "            << marketIndicatiors[3].getSymbol()             << endl;
+    cout << "temp_originalFileName : "  << marketIndicatiors[3].getOriginalFileName()   << endl;
+    //cout << "temp_dateFormat : "        << marketIndicatiors[3].getDateFormat()         << endl;
+    cout << "temp_columnOfInterest : "  << marketIndicatiors[3].getColumnOfInterest()   << endl;
+    cout << "temp_oldestDate : "        << marketIndicatiors[3].getOldestDate()         << endl;
+    cout << "temp_csvPathURL : "        << marketIndicatiors[3].getCsvPathURL()         << endl;
 }
+
 

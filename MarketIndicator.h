@@ -22,14 +22,15 @@ class MarketIndicator
 
         // constructor declaration
         MarketIndicator( 
-            string          _fullName,
-            string          _symbol,
-            string          _originalFileName,
-            DateFormat      _dateFormat,
-            unsigned int    _columnOfInterest,
-            string          _oldestDate, // might convert to object if needed
-            string          _csvPathURL 
+            string          fullName,
+            string          symbol,
+            string          originalFileName,
+            DateFormat      dateFormat,
+            unsigned int    columnOfInterest,
+            string          oldestDate, // might convert to object if needed
+            string          csvPathURL 
         );
+
         // accessor methods
         string          getFullName();
         string          getSymbol();
@@ -41,11 +42,11 @@ class MarketIndicator
 
     private:
         // member variables
-            string          _fullName;
-            string          _symbol;
-            string          _originalFileName;
-            DateFormat      _dateFormat;
-            unsigned int    _columnOfInterest;
-            string          _oldestDate; // might convert to object if needed
-            string          _csvPathURL;
+        string          _fullName;
+        string          _symbol;
+        string          _originalFileName;
+        DateFormat      _dateFormat;
+        unsigned int    _columnOfInterest;
+        string          _oldestDate; // might convert to object if needed
+        string          _csvPathURL;
 };

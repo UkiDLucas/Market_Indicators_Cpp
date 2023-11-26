@@ -8,7 +8,7 @@ Toyota Motor Corporation (TM),TM,TM.csv,yyyy-mm-dd,6,1976-08-18,https://query1.f
 Apple Inc. (AAPL),AAPL,AAPL.csv,yyyy-mm-dd,6,1980-12-12,https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=345427200&period2=1602028800&interval=1d&events=history
 "The Home Depot, Inc. (HD)                                     ",HD,HD.csv,yyyy-mm-dd,6,1981-09-22,https://query1.finance.yahoo.com/v7/finance/download/HD?period1=369964800&period2=1602028800&interval=1d&events=history
 Dow Jones Industrial Average (^DJI),DJIA,^DJI.csv,yyyy-mm-dd,6,1985-01-29,https://query1.finance.yahoo.com/v7/finance/download/%5EDJI?period1=475804800&period2=1602028800&interval=1d&events=history&includeAdjustedClose=true
-Microsoft Corporation (MSFT),MSFT,MSFT,yyyy-mm-dd,6,1986-03-13,https://query1.finance.yahoo.com/v7/finance/download/MSFT?period1=511056000&period2=1607990400&interval=1d&events=history&includeAdjustedClose=true
+Microsoft Corporation (MSFT),MSFT,MSFT,yyyy-mm-dd,PROBLEM,1986-03-13,https://query1.finance.yahoo.com/v7/finance/download/MSFT?period1=511056000&period2=1607990400&interval=1d&events=history&includeAdjustedClose=true
 Russell 2000 (^RUT),RUT,^RUT.csv,yyyy-mm-dd,6,1987-09-10,https://query1.finance.yahoo.com/v7/finance/download/%5ERUT?period1=558230400&period2=1607990400&interval=1d&events=history&includeAdjustedClose=true
 CBOE Volatility Index (^VIX),VIX,^VIX.csv,yyyy-mm-dd,6,1990-01-02,https://query1.finance.yahoo.com/v7/finance/download/%5EVIX?period1=631238400&period2=1602028800&interval=1d&events=history
 Vanguard Institutional Index Fund Institutional Shares (VINIX),VINIX,VINIX.csv,yyyy-mm-dd,6,1990-07-31,https://query1.finance.yahoo.com/v7/finance/download/VINIX?period1=649382400&period2=1602028800&interval=1d&events=history

@@ -28,26 +28,27 @@ class Tokenizer
         ** @input: text to be splitted into tokens,
         ** @input: a vector of delimiters   
         */
-        Tokenizer(string text, vector<char> delimiters );
+        Tokenizer();
 
         // public methods
 
         /** prints tokens to console */
-        void printTokens();
-        std::vector<std::string> getTokens();
+        void printTokens(std::vector<std::string> tokens);
+    
+        /** 
+         ** @input: text to be slipped into tokens,
+        ** @input: a single  delimiter, the delimiters could be multi-character text,
+        ** @output: vector of string tokens
+        **/
+        vector<string> extractTokens( string text, char delimiter );
 
     private:
         // member variables
         /** class holder of the tokens */
-        std::vector<std::string> tokens;
+        //std::vector<std::string> tokens;
 
         // private methods
 
-        /** 
-         ** @input: text to be slipped into tokens,
-         ** @input: a single  delimiter, the delimiters could be multi-character text,
-         ** @output: vector of string tokens
-         **/
-        vector<string> extractTokens( string text, char delimiter );
+
 
 };
